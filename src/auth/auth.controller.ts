@@ -87,4 +87,10 @@ export class AuthController {
       throw new BadGatewayException(error);
     }
   }
+
+  @Post('logout')
+  async logout(@Res({ passthrough: true }) response: Response) {
+    response.clearCookie('jwt');
+    return { message: 'logout succcessful' };
+  }
 }
