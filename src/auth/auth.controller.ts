@@ -2,12 +2,16 @@ import {
   BadGatewayException,
   BadRequestException,
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Get,
+  HttpException,
+  HttpStatus,
   NotFoundException,
   Post,
   Req,
   Res,
+  UseInterceptors,
 } from '@nestjs/common';
 import { User } from 'src/user/models/user.entity';
 import { UserService } from 'src/user/user.service';
@@ -26,10 +30,16 @@ export class AuthController {
   @Post('register')
   async register(@Body() body: RegisterDTO): Promise<User> {
     try {
-      const { password, password_confirmation } = body;
+      const { email, password, password_confirmation } = body;
 
       if (password != password_confirmation) {
         throw new BadRequestException('Passwords do not much');
+      }
+
+      const user = await this.userService.findOne({ email });
+
+      if (user) {
+        throw new HttpException('Conflict', HttpStatus.CONFLICT);
       }
 
       const hashed_password = await bcrypt.hash(password, 10);
@@ -42,6 +52,7 @@ export class AuthController {
     }
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Post('login')
   async login(
     @Body('email') email: string,
