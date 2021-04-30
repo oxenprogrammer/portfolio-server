@@ -78,7 +78,7 @@ export class AuthController {
   }
 
   @Get('user')
-  async user(@Req() request: Request) {
+  async user(@Req() request: Request): Promise<User> {
     try {
       const cookie = await request.cookies['jwt'];
       const data = await this.jwtService.verifyAsync(cookie);
