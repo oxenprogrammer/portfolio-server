@@ -3,8 +3,10 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   NotFoundException,
   Post,
+  Req,
   Res,
 } from '@nestjs/common';
 import { User } from 'src/user/models/user.entity';
@@ -12,7 +14,7 @@ import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcryptjs';
 import { RegisterDTO } from './model/register.dto';
 import { JwtService } from '@nestjs/jwt';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -56,9 +58,20 @@ export class AuthController {
       if (!(await bcrypt.compare(password, user.password))) {
         throw new BadRequestException('Email or Password is wrong');
       }
-      const jwt = this.jwtService.signAsync({ id: user.id });
+      const jwt = await this.jwtService.signAsync({ id: user.id });
       response.cookie('jwt', jwt, { httpOnly: true });
       return user;
+    } catch (error) {
+      throw new BadGatewayException(error);
+    }
+  }
+
+  @Get('user')
+  async user(@Req() request: Request) {
+    try {
+      const cookie = await request.cookies['jwt'];
+      const data = await this.jwtService.verifyAsync(cookie);
+      return data;
     } catch (error) {
       throw new BadGatewayException(error);
     }
