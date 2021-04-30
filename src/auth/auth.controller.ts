@@ -71,7 +71,7 @@ export class AuthController {
     try {
       const cookie = await request.cookies['jwt'];
       const data = await this.jwtService.verifyAsync(cookie);
-      return data;
+      return this.userService.findOne({ id: data['id'] });
     } catch (error) {
       throw new BadGatewayException(error);
     }
