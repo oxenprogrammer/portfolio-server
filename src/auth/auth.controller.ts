@@ -5,15 +5,21 @@ import {
   Controller,
   NotFoundException,
   Post,
+  Res,
 } from '@nestjs/common';
 import { User } from 'src/user/models/user.entity';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcryptjs';
 import { RegisterDTO } from './model/register.dto';
+import { JwtService } from '@nestjs/jwt';
+import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private jwtService: JwtService,
+  ) {}
 
   @Post('register')
   async register(@Body() body: RegisterDTO): Promise<User> {
@@ -38,6 +44,7 @@ export class AuthController {
   async login(
     @Body('email') email: string,
     @Body('password') password: string,
+    @Res({ passthrough: true }) response: Response,
   ): Promise<User> {
     try {
       const user = await this.userService.findOne({ email });
@@ -49,7 +56,8 @@ export class AuthController {
       if (!(await bcrypt.compare(password, user.password))) {
         throw new BadRequestException('Email or Password is wrong');
       }
-
+      const jwt = this.jwtService.signAsync({ id: user.id });
+      response.cookie('jwt', jwt, { httpOnly: true });
       return user;
     } catch (error) {
       throw new BadGatewayException(error);
