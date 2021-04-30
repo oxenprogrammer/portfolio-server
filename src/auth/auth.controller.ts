@@ -20,6 +20,7 @@ import { RegisterDTO } from './model/register.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -52,7 +53,6 @@ export class AuthController {
     }
   }
 
-  @UseInterceptors(ClassSerializerInterceptor)
   @Post('login')
   async login(
     @Body('email') email: string,
