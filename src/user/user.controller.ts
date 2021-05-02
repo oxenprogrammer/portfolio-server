@@ -6,6 +6,7 @@ import {
   Get,
   HttpException,
   HttpStatus,
+  Param,
   Post,
   UseGuards,
   UseInterceptors,
@@ -28,7 +29,7 @@ export class UserController {
   }
 
   @Post()
-  async create(@Body() body: User) {
+  async create(@Body() body: User): Promise<User> {
     const { email } = body;
     const hashed_password = await bcrypt.hash('1234', 10);
     try {
@@ -45,5 +46,10 @@ export class UserController {
     } catch (error) {
       throw new BadGatewayException(error);
     }
+  }
+
+  @Get(':id')
+  async get(@Param('id') id: string): Promise<User> {
+    return await this.userService.findOne({ id });
   }
 }
