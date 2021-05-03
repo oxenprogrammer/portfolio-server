@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, ObjectID, Repository } from 'typeorm';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { Repository } from 'typeorm';
 import { UserUpdateDTO } from './models/user-update.dto';
 import { User } from './models/user.entity';
 
@@ -25,5 +24,9 @@ export class UserService {
 
   async update(id: string, data: UserUpdateDTO): Promise<any> {
     return await this.userRepository.update(id, data);
+  }
+
+  async delete(id: string): Promise<any> {
+    return await this.userRepository.delete(id);
   }
 }

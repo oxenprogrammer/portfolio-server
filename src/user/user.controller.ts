@@ -3,6 +3,7 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -60,5 +61,11 @@ export class UserController {
   async update(@Param('id') id: string, @Body() body: UserUpdateDTO) {
     await this.userService.update(id, body);
     return await this.userService.findOne({ id });
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<Record<string, unknown>> {
+    await this.userService.delete(id);
+    return { message: 'User Deleted Successfully' };
   }
 }
