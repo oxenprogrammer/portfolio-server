@@ -56,7 +56,7 @@ export class UserController {
     return await this.userService.findOne({ id });
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(@Param('id') id: string, @Body() body: UserUpdateDTO) {
     await this.userService.update(id, body);
     return await this.userService.findOne({ id });
