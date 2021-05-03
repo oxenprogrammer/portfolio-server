@@ -7,7 +7,9 @@ import {
   HttpException,
   HttpStatus,
   Param,
+  Patch,
   Post,
+  Put,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -16,6 +18,7 @@ import { User } from './models/user.entity';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcryptjs';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { UserUpdateDTO } from './models/user-update.dto';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @UseGuards(AuthGuard)
@@ -50,6 +53,12 @@ export class UserController {
 
   @Get(':id')
   async get(@Param('id') id: string): Promise<User> {
+    return await this.userService.findOne({ id });
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() body: UserUpdateDTO) {
+    await this.userService.update(id, body);
     return await this.userService.findOne({ id });
   }
 }
