@@ -17,9 +17,15 @@ export class RoleController {
   constructor(private roleService: RoleService) {}
 
   @Post()
-  async create(@Body('name') name: string): Promise<Role> {
+  async create(
+    @Body('name') name: string,
+    @Body('permissions') perm_ids: string[],
+  ): Promise<Role> {
     try {
-      return await this.roleService.create({ name });
+      return await this.roleService.create({
+        name,
+        permissions: perm_ids.map((id) => ({ id })),
+      });
     } catch (error) {
       throw new BadGatewayException(error);
     }
@@ -36,9 +42,20 @@ export class RoleController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body('name') name: string) {
-    await this.roleService.update(id, { name });
-    return await this.roleService.findOne({ id });
+  async update(
+    @Param('id') id: string,
+    @Body('name') name: string,
+    @Body('permissions') perm_ids: string[],
+  ) {
+    if (name) {
+      await this.roleService.update(id, { name });
+    }
+
+    const role = await this.roleService.findOne({ id });
+    return await this.roleService.create({
+      ...role,
+      permissions: perm_ids.map((id) => ({ id })),
+    });
   }
 
   @Delete(':id')
