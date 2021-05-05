@@ -8,6 +8,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [TypeOrmModule.forFeature([Permission]), CommonModule],
   providers: [PermissionService],
-  controllers: [PermissionController]
+  controllers: [PermissionController],
 })
 export class PermissionModule {}
