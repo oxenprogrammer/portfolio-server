@@ -14,8 +14,8 @@ export abstract class AbstractService {
     return await this.repository.save(data);
   }
 
-  async findOne(data): Promise<any> {
-    return await this.repository.findOne(data);
+  async findOne(data, relations = []): Promise<any> {
+    return await this.repository.findOne(data, { relations });
   }
 
   async update(id: string, data: any): Promise<any> {

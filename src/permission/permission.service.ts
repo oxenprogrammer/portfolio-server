@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AbstractService } from 'src/common/abstract.service';
 import { Repository } from 'typeorm';
-import { PermissionDTO } from './model/permission.dto';
 import { Permission } from './permission.entity';
 
 @Injectable()
