@@ -18,4 +18,8 @@ export class PermissionService {
   async create(data: PermissionDTO): Promise<Permission> {
     return await this.permissionRepository.save(data);
   }
+
+  async delete(id: string): Promise<any> {
+    return await this.permissionRepository.delete(id);
+  }
 }

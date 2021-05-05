@@ -2,10 +2,11 @@ import {
   BadGatewayException,
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
 } from '@nestjs/common';
-import { PermissionDTO } from './model/permission.dto';
 
 import { Permission } from './permission.entity';
 import { PermissionEnum } from './permission.enum';
@@ -31,5 +32,11 @@ export class PermissionController {
     } catch (error) {
       throw new BadGatewayException(error);
     }
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<Record<string, unknown>> {
+    await this.permissionService.delete(id);
+    return { message: 'Permission Deleted Successfully' };
   }
 }
