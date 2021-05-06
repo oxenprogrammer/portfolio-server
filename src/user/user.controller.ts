@@ -1,5 +1,6 @@
 import {
   BadGatewayException,
+  BadRequestException,
   Body,
   ClassSerializerInterceptor,
   Controller,
@@ -87,5 +88,35 @@ export class UserController {
     const id = await this.authService.userId(request);
     await this.userService.update(id, body);
     return await this.userService.findOne({ id });
+  }
+
+  @Put('password')
+  async updatePassword(
+    @Req() request: Request,
+    @Body() body: Record<string, string>,
+  ) {
+    const { old_password, password, password_confirmation } = body;
+
+    const id = await this.authService.userId(request);
+    const user = await this.userService.findOne({ id });
+
+    if (!(await bcrypt.compare(old_password, user.password))) {
+      throw new HttpException(
+        'Current Password is wrong',
+        HttpStatus.EXPECTATION_FAILED,
+      );
+    }
+
+    if (password !== password_confirmation) {
+      throw new HttpException(
+        'Passwords do not Match',
+        HttpStatus.EXPECTATION_FAILED,
+      );
+    }
+
+    const hashed_password = await bcrypt.hash(password, 10);
+
+    await this.userService.update(id, { password: hashed_password });
+    return user;
   }
 }
