@@ -21,6 +21,7 @@ import { RegisterDTO } from './model/register.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
 import { AuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
@@ -28,6 +29,7 @@ export class AuthController {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
+    private authService: AuthService,
   ) {}
 
   @Post('register')
@@ -84,9 +86,8 @@ export class AuthController {
   @Get('user')
   async user(@Req() request: Request): Promise<User> {
     try {
-      const cookie = await request.cookies['jwt'];
-      const data = await this.jwtService.verifyAsync(cookie);
-      return this.userService.findOne({ id: data['id'] });
+      const id = await this.authService.userId(request);
+      return this.userService.findOne({ id });
     } catch (error) {
       throw new BadGatewayException(error);
     }
