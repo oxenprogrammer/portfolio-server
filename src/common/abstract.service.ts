@@ -6,8 +6,8 @@ import { Repository } from 'typeorm';
 export abstract class AbstractService {
   protected constructor(protected readonly repository: Repository<any>) {}
 
-  async all(): Promise<any[]> {
-    return await this.repository.find();
+  async all(relations = []): Promise<any[]> {
+    return await this.repository.find({ relations });
   }
 
   async create(data): Promise<any> {
