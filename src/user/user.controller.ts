@@ -67,13 +67,13 @@ export class UserController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() body: any) {
-    const { role_id } = body;
+  async update(@Param('id') id: string, @Body() body: UserUpdateDTO) {
+    const { role_id, ...data } = body;
     await this.userService.update(id, {
-      ...body,
+      ...data,
       role: { id: role_id },
     });
-    return await this.userService.findOne({ id });
+    return await this.userService.findOne({ id }, ['role']);
   }
 
   @Delete(':id')
@@ -90,10 +90,7 @@ export class UserController {
   }
 
   @Put('password')
-  async updatePassword(
-    @Req() request: Request,
-    @Body() body: Record<string, string>,
-  ) {
+  async updatePassword(@Req() request: Request, @Body() body: UserUpdateDTO) {
     const { old_password, password, password_confirmation } = body;
 
     const id = await this.authService.userId(request);

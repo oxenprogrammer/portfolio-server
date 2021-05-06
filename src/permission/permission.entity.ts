@@ -8,7 +8,7 @@ export class Permission {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', unique: true })
   @IsEnum(PermissionEnum)
   name: PermissionEnum;
 }
