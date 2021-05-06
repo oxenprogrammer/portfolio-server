@@ -10,7 +10,9 @@ import {
   Param,
   Patch,
   Post,
+  Put,
   Query,
+  Req,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -20,12 +22,18 @@ import { UserService } from './user.service';
 import * as bcrypt from 'bcryptjs';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { UserCreateDTO } from './models/user-create.dto';
+import { Request } from 'express';
+import { UserUpdateDTO } from './models/user-update.dto';
+import { AuthService } from 'src/auth/auth.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @UseGuards(AuthGuard)
 @Controller('user')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+  ) {}
 
   @Get()
   async all(@Query('page') page = 1) {
@@ -72,5 +80,12 @@ export class UserController {
   async delete(@Param('id') id: string): Promise<Record<string, unknown>> {
     await this.userService.delete(id);
     return { message: 'User Deleted Successfully' };
+  }
+
+  @Put('info')
+  async updateInfo(@Req() request: Request, @Body() body: UserUpdateDTO) {
+    const id = await this.authService.userId(request);
+    await this.userService.update(id, body);
+    return await this.userService.findOne({ id });
   }
 }
