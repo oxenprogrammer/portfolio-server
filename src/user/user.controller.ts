@@ -19,7 +19,6 @@ import { User } from './models/user.entity';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcryptjs';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { UserUpdateDTO } from './models/user-update.dto';
 import { UserCreateDTO } from './models/user-create.dto';
 
 @UseInterceptors(ClassSerializerInterceptor)
@@ -29,8 +28,8 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  async all(@Query('page') page = 1): Promise<User[]> {
-    return await this.userService.paginate(page);
+  async all(@Query('page') page = 1) {
+    return await this.userService.paginate(page, ['role']);
   }
 
   @Post()
@@ -56,7 +55,7 @@ export class UserController {
 
   @Get(':id')
   async get(@Param('id') id: string): Promise<User> {
-    return await this.userService.findOne({ id });
+    return await this.userService.findOne({ id }, ['role']);
   }
 
   @Patch(':id')

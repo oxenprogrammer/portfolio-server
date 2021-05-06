@@ -26,11 +26,12 @@ export abstract class AbstractService {
     return await this.repository.delete(id);
   }
 
-  async paginate(page: number): Promise<AbstractPaginationDTO> {
+  async paginate(page: number, relations = []): Promise<AbstractPaginationDTO> {
     const take = 10;
     const [data, total] = await this.repository.findAndCount({
       take,
       skip: (page - 1) * take,
+      relations,
     });
     return {
       data: data,
