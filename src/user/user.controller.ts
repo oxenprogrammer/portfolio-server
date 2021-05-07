@@ -67,7 +67,7 @@ export class UserController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() body: UserUpdateDTO) {
+  async updateRole(@Param('id') id: string, @Body() body: UserUpdateDTO) {
     const { role_id, ...data } = body;
     await this.userService.update(id, {
       ...data,
