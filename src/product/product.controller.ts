@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ProductCreateDTO } from './models/product-create.dto';
 import { ProductUpdateDTO } from './models/product-update.dto';
@@ -16,6 +17,11 @@ import { ProductService } from './product.service';
 @Controller('product')
 export class ProductController {
   constructor(private productService: ProductService) {}
+
+  @Get()
+  async all(@Query('page') page = 1) {
+    return await this.productService.paginate(page);
+  }
 
   @Post()
   async create(@Body() body: ProductCreateDTO): Promise<Product[]> {
