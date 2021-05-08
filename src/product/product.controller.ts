@@ -8,7 +8,11 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { multerOptions } from 'src/common/multer-options';
 import { ProductCreateDTO } from './models/product-create.dto';
 import { ProductUpdateDTO } from './models/product-update.dto';
 import { Product } from './models/product.entity';
@@ -24,9 +28,19 @@ export class ProductController {
   }
 
   @Post()
-  async create(@Body() body: ProductCreateDTO): Promise<Product[]> {
+  @UseInterceptors(FileInterceptor('image', multerOptions))
+  async create(
+    @UploadedFile() file,
+    @Body() body: ProductCreateDTO,
+  ): Promise<Product[]> {
+    const { title, desc, price } = body;
     try {
-      return await this.productService.create(body);
+      return await this.productService.create({
+        title,
+        desc,
+        price,
+        image: `http://127.0.0.1:8000/api/${file.path}`,
+      });
     } catch (error) {
       throw new BadRequestException('Product creation failed');
     }

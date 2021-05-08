@@ -8,8 +8,5 @@ export class ProductCreateDTO {
   desc: string;
 
   @IsNotEmpty()
-  image: string;
-
-  @IsNotEmpty()
   price: string;
 }
