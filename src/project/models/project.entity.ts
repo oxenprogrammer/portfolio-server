@@ -15,5 +15,5 @@ export class Project {
   image: string;
 
   @Column()
-  tag: string[];
+  language: string;
 }

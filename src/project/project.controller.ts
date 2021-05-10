@@ -22,12 +22,12 @@ export class ProjectController {
     @UploadedFile() file,
     @Body() body: ProjectCreateDTO,
   ): Promise<Project> {
-    const { title, desc, tag } = body;
+    const { title, desc, language } = body;
     try {
       return await this.projectService.create({
         title,
         desc,
-        tag,
+        language,
         image: `http://127.0.0.1:8000/api/${file.path}`,
       });
     } catch (error) {
