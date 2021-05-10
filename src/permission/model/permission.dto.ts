@@ -1,7 +1,6 @@
-import { IsEnum } from 'class-validator';
-import { PermissionEnum } from '../permission.enum';
+import { IsNotEmpty } from 'class-validator';
 
 export class PermissionDTO {
-  @IsEnum(PermissionEnum)
-  name: PermissionEnum;
+  @IsNotEmpty()
+  name: string;
 }

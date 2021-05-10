@@ -7,9 +7,9 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
+import { PermissionDTO } from './model/permission.dto';
 
 import { Permission } from './permission.entity';
-import { PermissionEnum } from './permission.enum';
 import { PermissionService } from './permission.service';
 
 @Controller('permission')
@@ -26,7 +26,7 @@ export class PermissionController {
   }
 
   @Post()
-  async create(@Body('name') name: PermissionEnum): Promise<any> {
+  async create(@Body('name') name: PermissionDTO): Promise<any> {
     try {
       return await this.permissionService.create({ name });
     } catch (error) {
