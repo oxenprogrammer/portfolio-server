@@ -20,11 +20,11 @@ import { BlogCreateDTO } from './models/blog-create.dto';
 import { BlogUpdateDTO } from './models/blog-update.dto';
 import { Blog } from './models/blog.entity';
 
-@UseGuards(AuthGuard)
 @Controller('blog')
 export class BlogController {
   constructor(private blogService: BlogService) {}
 
+  @UseGuards(AuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('image', multerOptions))
   async create(
@@ -43,6 +43,7 @@ export class BlogController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Patch(':id')
   @UseInterceptors(FileInterceptor('image', multerOptions))
   async update(
@@ -67,6 +68,7 @@ export class BlogController {
     return await this.blogService.findOne({ id });
   }
 
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<Record<string, string>> {
     await this.blogService.delete(id);

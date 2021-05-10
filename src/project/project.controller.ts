@@ -20,11 +20,11 @@ import { ProjectUpdateDTO } from './models/project-update.dto';
 import { Project } from './models/project.entity';
 import { ProjectService } from './project.service';
 
-@UseGuards(AuthGuard)
 @Controller('project')
 export class ProjectController {
   constructor(private projectService: ProjectService) {}
 
+  @UseGuards(AuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('image', multerOptions))
   async create(
@@ -44,6 +44,7 @@ export class ProjectController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Patch(':id')
   @UseInterceptors(FileInterceptor('image', multerOptions))
   async update(
@@ -70,6 +71,7 @@ export class ProjectController {
     return await this.projectService.findOne({ id });
   }
 
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<Record<string, string>> {
     await this.projectService.delete(id);
