@@ -3,9 +3,11 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Param,
   Patch,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -69,5 +71,15 @@ export class ProjectController {
   async delete(@Param('id') id: string): Promise<Record<string, string>> {
     await this.projectService.delete(id);
     return { message: 'Project Deleted Successfully' };
+  }
+
+  @Get(':id')
+  async get(@Param('id') id: string): Promise<Project> {
+    return await this.projectService.findOne({ id });
+  }
+
+  @Get()
+  async all(@Query('page') page = 1) {
+    return await this.projectService.paginate(page);
   }
 }
