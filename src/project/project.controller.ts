@@ -2,6 +2,8 @@ import {
   BadGatewayException,
   Body,
   Controller,
+  Param,
+  Patch,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -9,6 +11,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'src/common/multer-options';
 import { ProjectCreateDTO } from './models/project-create.dto';
+import { ProjectUpdateDTO } from './models/project-update.dto';
 import { Project } from './models/project.entity';
 import { ProjectService } from './project.service';
 
@@ -33,5 +36,31 @@ export class ProjectController {
     } catch (error) {
       throw new BadGatewayException(error);
     }
+  }
+
+  @Patch(':id')
+  @UseInterceptors(FileInterceptor('image', multerOptions))
+  async update(
+    @Param('id') id: string,
+    @UploadedFile() file,
+    @Body() body: ProjectUpdateDTO,
+  ): Promise<Project> {
+    const { title, desc, language } = body;
+
+    if (file) {
+      await this.projectService.update(id, {
+        title,
+        desc,
+        language,
+        image: `http://127.0.0.1:8000/api/${file.path}`,
+      });
+      return await this.projectService.findOne({ id });
+    }
+    await this.projectService.update(id, {
+      title,
+      desc,
+      language,
+    });
+    return await this.projectService.findOne({ id });
   }
 }
