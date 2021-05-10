@@ -7,6 +7,7 @@ import { Module } from '@nestjs/common';
 import { PermissionModule } from './permission/permission.module';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UserModule } from './user/user.module';
     CommonModule,
     RoleModule,
     PermissionModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],
