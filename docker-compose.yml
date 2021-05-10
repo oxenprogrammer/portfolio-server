@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   main:
-    container_name: main
+    container_name: main-server
     build:
       context: .
       target: development
@@ -21,12 +21,12 @@ services:
       - redis
       - postgres
   redis:
-    container_name: redis
+    container_name: redis-db
     image: redis:5
     networks:
       - webnet
   postgres:
-    container_name: postgres
+    container_name: postgres-db
     image: postgres:12
     networks:
       - webnet
