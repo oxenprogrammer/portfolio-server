@@ -9,15 +9,18 @@ import {
   Post,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { AuthGuard } from 'src/auth/auth.guard';
 import { multerOptions } from 'src/common/multer-options';
 import { ProjectCreateDTO } from './models/project-create.dto';
 import { ProjectUpdateDTO } from './models/project-update.dto';
 import { Project } from './models/project.entity';
 import { ProjectService } from './project.service';
 
+@UseGuards(AuthGuard)
 @Controller('project')
 export class ProjectController {
   constructor(private projectService: ProjectService) {}
