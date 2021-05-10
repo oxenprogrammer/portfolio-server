@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 
+import { Blog } from 'src/blog/models/blog.entity';
 import { Module } from '@nestjs/common';
 import { Permission } from 'src/permission/permission.entity';
 import { Project } from 'src/project/models/project.entity';
@@ -18,7 +19,7 @@ dotenv.config();
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE_NAME,
-      entities: [User, Role, Permission, Project],
+      entities: [User, Role, Permission, Project, Blog],
       synchronize: true,
     }),
   ],
