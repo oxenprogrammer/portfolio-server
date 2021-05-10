@@ -51,7 +51,7 @@ export class AuthController {
       return await this.userService.create({
         ...body,
         password: hashed_password,
-        role: { id: 'cb80dedd-6b26-4570-8b3c-df79fcfd993c' },
+        role: { id: '000f53a9-83d6-44b0-bb3e-8dfeb3757a95' },
       });
     } catch (error) {
       throw new BadGatewayException(error);
