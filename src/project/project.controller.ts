@@ -2,6 +2,7 @@ import {
   BadGatewayException,
   Body,
   Controller,
+  Delete,
   Param,
   Patch,
   Post,
@@ -62,5 +63,11 @@ export class ProjectController {
       language,
     });
     return await this.projectService.findOne({ id });
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<Record<string, string>> {
+    await this.projectService.delete(id);
+    return { message: 'Project Deleted Successfully' };
   }
 }
