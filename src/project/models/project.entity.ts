@@ -14,6 +14,6 @@ export class Project {
   @Column({ type: 'varchar' })
   image: string;
 
-  @Column()
-  language: string;
+  @Column('simple-array', { nullable: true })
+  language: string[];
 }
