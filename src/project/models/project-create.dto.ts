@@ -8,5 +8,5 @@ export class ProjectCreateDTO {
   desc: string;
 
   @IsNotEmpty()
-  language: string;
+  languages: string[];
 }

@@ -15,5 +15,5 @@ export class Project {
   image: string;
 
   @Column('simple-array', { nullable: true })
-  language: string[];
+  languages: string[];
 }

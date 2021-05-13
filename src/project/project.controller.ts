@@ -31,12 +31,12 @@ export class ProjectController {
     @UploadedFile() file,
     @Body() body: ProjectCreateDTO,
   ): Promise<Project> {
-    const { title, desc, language } = body;
+    const { title, desc, languages } = body;
     try {
       return await this.projectService.create({
         title,
         desc,
-        language,
+        languages,
         image: `http://127.0.0.1:8000/api/${file.path}`,
       });
     } catch (error) {
@@ -52,13 +52,13 @@ export class ProjectController {
     @UploadedFile() file,
     @Body() body: ProjectUpdateDTO,
   ): Promise<Project> {
-    const { title, desc, language } = body;
+    const { title, desc, languages } = body;
 
     if (file) {
       await this.projectService.update(id, {
         title,
         desc,
-        language,
+        languages,
         image: `http://127.0.0.1:8000/api/${file.path}`,
       });
       return await this.projectService.findOne({ id });
@@ -66,7 +66,7 @@ export class ProjectController {
     await this.projectService.update(id, {
       title,
       desc,
-      language,
+      languages,
     });
     return await this.projectService.findOne({ id });
   }
