@@ -18,9 +18,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "multer-storage-cloudinary": "^4.0.0",
-    "cloudinary": "^1.23.0"
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",
@@ -35,9 +33,11 @@
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
+    "cloudinary": "^1.25.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",

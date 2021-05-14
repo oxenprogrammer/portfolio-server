@@ -37,7 +37,7 @@ export class ProjectController {
         title,
         desc,
         languages,
-        image: `http://127.0.0.1:8000/api/${file.path}`,
+        image: `${file.path}`,
       });
     } catch (error) {
       throw new BadGatewayException(error);
