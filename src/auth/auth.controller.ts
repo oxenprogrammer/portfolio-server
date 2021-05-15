@@ -22,6 +22,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
+import { RoleService } from 'src/role/role.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
@@ -30,6 +31,7 @@ export class AuthController {
     private userService: UserService,
     private jwtService: JwtService,
     private authService: AuthService,
+    private roleService: RoleService,
   ) {}
 
   @Post('register')
@@ -47,11 +49,13 @@ export class AuthController {
         throw new HttpException('Conflict', HttpStatus.CONFLICT);
       }
 
+      const role = await this.roleService.findOne({ name: 'NORMAL' });
+
       const hashed_password = await bcrypt.hash(password, 10);
       return await this.userService.create({
         ...body,
         password: hashed_password,
-        role: { id: '5307c502-4c8c-44e0-88d8-dfb0bface69a' },
+        role: { id: role.id },
       });
     } catch (error) {
       throw new BadGatewayException(error);
