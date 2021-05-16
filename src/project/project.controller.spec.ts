@@ -22,7 +22,11 @@ describe('ProjectController', () => {
         last_page: 0,
       },
     };
-    projectService.paginate = jest.fn().mockImplementation((): any => result);
+    // projectService.paginate = jest.fn().mockImplementation((): any => result);
+    const spy = jest
+      .spyOn(projectService, 'paginate')
+      .mockImplementation((): any => result);
     expect(await projectController.all(1)).toEqual(result);
+    expect(spy).toBeCalledTimes(1);
   });
 });
