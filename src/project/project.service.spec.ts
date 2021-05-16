@@ -1,6 +1,5 @@
 import { Project } from './models/project.entity';
 import { ProjectService } from './project.service';
-import { ProjectUpdateDTO } from './models/project-update.dto';
 import { Repository } from 'typeorm';
 import { Test } from '@nestjs/testing/test';
 import { getRepositoryToken } from '@nestjs/typeorm';
