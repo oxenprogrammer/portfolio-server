@@ -76,4 +76,35 @@ describe('ProjectController', () => {
     expect(await projectController.delete('1')).toBeTruthy;
     expect(spy).toBeCalledTimes(1);
   });
+
+  it('should create a new project', async () => {
+    const result = {
+      id: '1',
+      title: 'first project',
+      desc: 'description',
+      image: 'my image',
+      languages: ['image1', 'image2'],
+    };
+    const spy = jest
+      .spyOn(projectService, 'create')
+      .mockImplementation((): any => result);
+    expect(await projectController.create('file', result)).toBe(result);
+    expect(spy).toBeCalledTimes(1);
+  });
+
+  it('should update an existing project', async () => {
+    const result = {
+      id: '1',
+      title: 'first project',
+      desc: 'description',
+      image: 'my image',
+      languages: ['image1', 'image2'],
+    };
+    jest.spyOn(projectService, 'findOne').mockImplementation((): any => result);
+    const spy = jest
+      .spyOn(projectService, 'update')
+      .mockImplementation((): any => result);
+    expect(await projectController.update('1', 'file', result)).toBe(result);
+    expect(spy).toBeCalledTimes(1);
+  });
 });
