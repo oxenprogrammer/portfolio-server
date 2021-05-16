@@ -29,4 +29,19 @@ describe('ProjectController', () => {
     expect(await projectController.all(1)).toEqual(result);
     expect(spy).toBeCalledTimes(1);
   });
+
+  it('should return a projects', async () => {
+    const result = {
+      id: '1',
+      title: 'first project',
+      desc: 'description',
+      image: 'my image',
+      lanaguages: ['image1', 'image2'],
+    };
+    const spy = jest
+      .spyOn(projectService, 'findOne')
+      .mockImplementation((): any => result);
+    expect(await projectController.get('1')).toEqual(result);
+    expect(spy).toBeCalledTimes(1);
+  });
 });
