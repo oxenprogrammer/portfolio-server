@@ -38,9 +38,8 @@ describe('AbstractService', () => {
       languages: ['image1', 'image2'],
     };
     it('should create a project', async () => {
-      const reposSpy = jest.spyOn(repository, 'create');
+      jest.spyOn(repository, 'create').mockImplementation((): any => result);
       expect(projectService.create(result)).toBeTruthy;
-      expect(reposSpy).toBeCalledTimes(0);
     });
 
     it('should update a project', async () => {
@@ -54,6 +53,14 @@ describe('AbstractService', () => {
         .spyOn(repository, 'findOne')
         .mockResolvedValue(result);
       expect(projectService.findOne('1')).toBeTruthy;
+      expect(reposSpy).toBeCalledTimes(1);
+    });
+
+    it('should delete a project', async () => {
+      const reposSpy = jest
+        .spyOn(repository, 'delete')
+        .mockImplementation((): any => result);
+      expect(projectService.delete('1')).toBeTruthy;
       expect(reposSpy).toBeCalledTimes(1);
     });
   });
