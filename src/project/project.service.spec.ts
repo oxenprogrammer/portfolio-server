@@ -49,5 +49,13 @@ describe('AbstractService', () => {
       expect(projectService.update('1', result)).toBeTruthy;
       expect(reposSpy).toBeCalledTimes(1);
     });
+
+    it('should find a project', async () => {
+      const reposSpy = jest
+        .spyOn(repository, 'findOne')
+        .mockResolvedValue(result);
+      expect(projectService.findOne('1')).toBeTruthy;
+      expect(reposSpy).toBeCalledTimes(1);
+    });
   });
 });
