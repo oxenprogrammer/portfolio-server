@@ -1,3 +1,4 @@
+import { BadGatewayException } from '@nestjs/common';
 import { Project } from './models/project.entity';
 import { ProjectController } from './project.controller';
 import { ProjectService } from './project.service';
@@ -43,5 +44,20 @@ describe('ProjectController', () => {
       .mockImplementation((): any => result);
     expect(await projectController.get('1')).toEqual(result);
     expect(spy).toBeCalledTimes(1);
+  });
+
+  it('should not delete a project that does not exists', async () => {
+    const deleteSpy = jest.spyOn(projectService, 'delete');
+    const findSpy = jest
+      .spyOn(projectService, 'findOne')
+      .mockImplementation((): any => undefined);
+    try {
+      await projectController.delete('1');
+    } catch (error) {
+      expect(error).toBeInstanceOf(BadGatewayException);
+    }
+
+    expect(deleteSpy).toBeCalledTimes(0);
+    expect(findSpy).toBeCalledTimes(1);
   });
 });
