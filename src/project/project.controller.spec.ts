@@ -60,4 +60,20 @@ describe('ProjectController', () => {
     expect(deleteSpy).toBeCalledTimes(0);
     expect(findSpy).toBeCalledTimes(1);
   });
+
+  it('should delete a projects that exists', async () => {
+    const result = {
+      id: '1',
+      title: 'first project',
+      desc: 'description',
+      image: 'my image',
+      lanaguages: ['image1', 'image2'],
+    };
+    jest.spyOn(projectService, 'findOne').mockImplementation((): any => result);
+    const spy = jest
+      .spyOn(projectService, 'delete')
+      .mockImplementation((): any => result);
+    expect(await projectController.delete('1')).toBeTruthy;
+    expect(spy).toBeCalledTimes(1);
+  });
 });

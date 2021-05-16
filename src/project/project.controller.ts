@@ -78,7 +78,7 @@ export class ProjectController {
     try {
       const project = await this.projectService.findOne({ id });
 
-      if (!project) {
+      if (project == undefined || null) {
         throw new NotFoundException();
       }
 
