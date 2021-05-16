@@ -20,11 +20,11 @@ import {
 import { User } from './models/user.entity';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcryptjs';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from './../auth/auth.guard';
 import { UserCreateDTO } from './models/user-create.dto';
 import { Request } from 'express';
 import { UserUpdateDTO } from './models/user-update.dto';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from './../auth/auth.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @UseGuards(AuthGuard)

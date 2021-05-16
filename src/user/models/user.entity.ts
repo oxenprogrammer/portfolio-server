@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
-import { Role } from 'src/role/role.entity';
+import { Role } from './../../role/role.entity';
 
 @Entity('users')
 export class User {

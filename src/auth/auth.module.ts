@@ -4,9 +4,9 @@ import { Module, forwardRef } from '@nestjs/common';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { CommonModule } from 'src/common/common.module';
-import { RoleModule } from 'src/role/role.module';
-import { UserModule } from 'src/user/user.module';
+import { CommonModule } from './../common/common.module';
+import { RoleModule } from './../role/role.module';
+import { UserModule } from './../user/user.module';
 
 dotenv.config();
 @Module({

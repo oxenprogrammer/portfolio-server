@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AbstractPaginationDTO } from 'src/common/abstract-pagination.dto';
-import { AbstractService } from 'src/common/abstract.service';
+import { AbstractPaginationDTO } from './../common/abstract-pagination.dto';
+import { AbstractService } from './../common/abstract.service';
 import { Repository } from 'typeorm';
 import { User } from './models/user.entity';
 

@@ -1,12 +1,12 @@
 import * as dotenv from 'dotenv';
 
-import { Blog } from 'src/blog/models/blog.entity';
+import { Blog } from './../blog/models/blog.entity';
 import { Module } from '@nestjs/common';
-import { Permission } from 'src/permission/permission.entity';
-import { Project } from 'src/project/models/project.entity';
-import { Role } from 'src/role/role.entity';
+import { Permission } from './../permission/permission.entity';
+import { Project } from './../project/models/project.entity';
+import { Role } from './../role/role.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/user/models/user.entity';
+import { User } from './../user/models/user.entity';
 
 dotenv.config();
 

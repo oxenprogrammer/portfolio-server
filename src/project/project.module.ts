@@ -1,4 +1,4 @@
-import { CommonModule } from 'src/common/common.module';
+import { CommonModule } from './../common/common.module';
 import { Module } from '@nestjs/common';
 import { Project } from './models/project.entity';
 import { ProjectController } from './project.controller';

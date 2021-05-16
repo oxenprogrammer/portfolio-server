@@ -13,8 +13,8 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { multerOptions } from 'src/common/multer-options';
+import { AuthGuard } from './../auth/auth.guard';
+import { multerOptions } from './../common/multer-options';
 import { ProjectCreateDTO } from './models/project-create.dto';
 import { ProjectUpdateDTO } from './models/project-update.dto';
 import { Project } from './models/project.entity';

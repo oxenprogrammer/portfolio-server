@@ -14,15 +14,15 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { User } from 'src/user/models/user.entity';
-import { UserService } from 'src/user/user.service';
+import { User } from './../user/models/user.entity';
+import { UserService } from './../user/user.service';
 import * as bcrypt from 'bcryptjs';
 import { RegisterDTO } from './model/register.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
-import { RoleService } from 'src/role/role.service';
+import { RoleService } from './../role/role.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')

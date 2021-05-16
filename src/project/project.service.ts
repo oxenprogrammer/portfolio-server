@@ -1,4 +1,4 @@
-import { AbstractService } from 'src/common/abstract.service';
+import { AbstractService } from './../common/abstract.service';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Project } from './models/project.entity';
