@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -74,8 +75,18 @@ export class ProjectController {
   @UseGuards(AuthGuard)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<Record<string, string>> {
-    await this.projectService.delete(id);
-    return { message: 'Project Deleted Successfully' };
+    try {
+      const project = await this.projectService.findOne({ id });
+
+      if (!project) {
+        throw new NotFoundException();
+      }
+
+      await this.projectService.delete(id);
+      return { message: 'Project Deleted Successfully' };
+    } catch (error) {
+      throw new BadGatewayException(error);
+    }
   }
 
   @Get(':id')
