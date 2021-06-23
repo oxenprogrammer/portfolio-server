@@ -1,73 +1,62 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+## Portfolio Backend
+A portfolio backend built using NestJs as a proof of concept on the simplicity of TypeScript. The app uses a well-organized framework that follows DRY and SOLID principles as an MVC.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### Technology
+- NodeJS
+- NestJs
+- TypeScript
+- Jest
+- TypeORM
+- PostgreSQL
+- Docker
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Getting Started
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+To get a local copy up and running follow these simple example steps.
 
-## Installation
+### Prerequisites
 
-```bash
-$ npm install
+- NodeJs installed. To learn how to install nodeJs on your machine, please follow this [link](https://nodejs.org/en/)
+- Docker and Docker Compose
+- nestJs Cli
+
+### Setup
+
+- Clone this repository using the link above (click on the 'code' button)
+- Create a `.env` file at the root of the project and replace the values accordly, look at `.env.example file` for required keys.
+- open a terminal and `cd` to the cloned repository
+- run `npm install` to install the dependencies
+- run `docker-compose up`to start the server
+
+
+### Run tests
+
+```
+    npm run test
 ```
 
-## Running the app
 
-```bash
-# development
-$ npm run start
+## Contirbutor
 
-# watch mode
-$ npm run start:dev
+👤 **Emanuel Okello**
 
-# production mode
-$ npm run start:prod
-```
+- GitHub: [oxenprogrammer](https://github.com/oxenprogrammer)
+- Twitter: [@ox_emmy](https://twitter.com/ox_emmy)
+- LinkedIn: [Emanuel Okello](https://www.linkedin.com/in/emanuel-okello/)
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
+## 🤝 Contributing
 
-# e2e tests
-$ npm run test:e2e
+Contributions, issues and feature requests are welcome!
 
-# test coverage
-$ npm run test:cov
-```
+Feel free to check the [issues page](https://github.com/oxenprogrammer/portfolio-server/issues).
 
-## Support
+## Show your support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Give a ⭐️ if you like this project!
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 📝 License
 
-## License
-
-Nest is [MIT licensed](LICENSE).
+This project is [MIT](LICENSE) licensed.
